@@ -6,7 +6,8 @@ import Typography from '@mui/material/Typography';
 import { Button, InputBase, styled } from '@mui/material';
 
 const Navbar = () => {
-  // will be moved to separate style file
+  // TODO :MOVE TO SEPARATE STYLE FILE
+
   const Search = styled('div')(({ theme }) => ({
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
@@ -52,7 +53,7 @@ const Navbar = () => {
               Suggestions
             </Button>
             <Button variant="outlined" component={Link} to="/">
-              Avatar
+              PROFILE
             </Button>
             <Button variant="outlined" component={Link} to="/login">
               Login

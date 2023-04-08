@@ -1,5 +1,7 @@
 {
   "name": "gitspy",
+  "description": "Gitspy is a web application built using React, TypeScript, Redux Toolkit (RTK), and RTK Query. Its main purpose is to allow users to search for Github profiles of others easily and efficiently.",
+  "author": "Swaijot",
   "private": true,
   "version": "0.0.0",
   "type": "module",
