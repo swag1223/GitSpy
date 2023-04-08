@@ -1,7 +1,7 @@
-import { createTheme } from "@mui/material";
+import { createTheme } from '@mui/material';
 
-import { BREAKPOINTS, COLORS, FONT_WEIGHTS } from "@constants/theme";
-import fonts from "./font";
+import { BREAKPOINTS, COLORS, FONT_WEIGHTS } from '@constants/theme';
+import fonts from './font';
 
 const { GRAY, RED, GREEN, BLUE } = COLORS;
 const theme = createTheme({
@@ -36,7 +36,7 @@ const theme = createTheme({
   },
   spacing: 4,
   shape: {
-    borderRadius: 16,
+    borderRadius: 10,
   },
   components: {
     MuiCssBaseline: {
@@ -48,12 +48,12 @@ const theme = createTheme({
 const finalTheme = createTheme({
   ...theme,
   typography: {
-    fontFamily: "Inter",
+    fontFamily: 'Inter',
     h1: {
       fontWeight: FONT_WEIGHTS.BOLD,
       fontSize: theme.typography.pxToRem(30),
       lineHeight: theme.typography.pxToRem(45),
-      [theme.breakpoints.up("sm")]: {
+      [theme.breakpoints.up('sm')]: {
         fontSize: theme.typography.pxToRem(48),
         lineHeight: theme.typography.pxToRem(62.4),
       },
