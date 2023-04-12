@@ -5,4 +5,4 @@ const URLS = {
   NOT_FOUND: '*',
 };
 
-export { URLS };
+export default URLS;

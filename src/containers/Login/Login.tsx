@@ -9,6 +9,7 @@ import { Button, CircularProgress, TextField, Typography } from '@mui/material';
 import githubUserApi from '@services/githubUserApiSlice';
 import { login } from '@store/user/userSlice';
 
+// import InputField from '@components/InputField/InputField';
 import { StyledLoginContainer, StyledForm } from './style';
 import { ErrorData, FormDataType } from './types';
 
@@ -71,6 +72,9 @@ const Login = () => {
       </Typography>
 
       <StyledForm onSubmit={handleSubmit(onSubmit)}>
+        {/* <InputField name="username" label="Username" type="text" /> */}
+
+        {/* <InputField name="password" label="Password" type="password" /> */}
         <Controller
           control={control}
           name="username"
