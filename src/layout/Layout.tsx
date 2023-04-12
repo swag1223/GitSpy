@@ -1,8 +1,10 @@
-import Navbar from '@containers/Navbar/Navbar';
-import { Box } from '@mui/material';
 import { Outlet } from 'react-router-dom';
 
-const Layout = () => {
+import { Box } from '@mui/material';
+
+import Navbar from '@containers/Navbar';
+
+const Layout = (): JSX.Element => {
   return (
     <Box>
       <Navbar />

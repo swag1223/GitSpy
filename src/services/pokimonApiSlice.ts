@@ -5,7 +5,10 @@ const pokemonApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: 'https://pokeapi.co/api/v2/' }),
   endpoints: (builder) => ({
     getPokemonByName: builder.query({
-      query: (name) => `pokemon/${name}`,
+      query: (name) => ({
+        url: `pokemon/${name}`,
+        // method: 'HEAD',
+      }),
     }),
   }),
 });

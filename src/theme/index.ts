@@ -1,6 +1,7 @@
 import { createTheme } from '@mui/material';
 
 import { BREAKPOINTS, COLORS, FONT_WEIGHTS } from '@constants/theme';
+
 import fonts from './font';
 
 const { GRAY, GREEN, BLUE } = COLORS;

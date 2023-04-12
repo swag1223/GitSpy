@@ -1,9 +1,7 @@
 import { Navigate } from 'react-router-dom';
 import cookies from 'browser-cookies';
 
-type PrivateRoutePropTypes = {
-  children: JSX.Element;
-};
+import { PrivateRoutePropTypes } from './types';
 
 const PrivateRoute = ({ children }: PrivateRoutePropTypes): JSX.Element => {
   const authToken = cookies.get('token');
