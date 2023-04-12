@@ -25,6 +25,7 @@
       "@mockData/*": ["mockData/*"],
       "@layout/*": ["layout/*"],
       "@routes/*": ["routes/*"],
+      "@services/*": ["services/*"],
       "@store/*": ["store/*"],
       "@styles/*": ["styles/*"],
       "@theme/*": ["theme/*"],

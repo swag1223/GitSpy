@@ -1,17 +1,13 @@
-import { RootState } from '@store/index';
-import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
+import cookies from 'browser-cookies';
 
 type PrivateRoutePropTypes = {
   children: JSX.Element;
 };
 
-const PrivateRoute = ({ children }: PrivateRoutePropTypes) => {
-  const isLoggedIn = useSelector(
-    (state: RootState) => state.user.value.isLoggedIn
-  );
-  const auth = { token: isLoggedIn };
-  return !auth.token ? <Navigate to="/login" /> : children;
+const PrivateRoute = ({ children }: PrivateRoutePropTypes): JSX.Element => {
+  const authToken = cookies.get('token');
+  return !authToken ? <Navigate to="/login" /> : children;
 };
 
 export default PrivateRoute;

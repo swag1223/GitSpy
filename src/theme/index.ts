@@ -3,7 +3,7 @@ import { createTheme } from '@mui/material';
 import { BREAKPOINTS, COLORS, FONT_WEIGHTS } from '@constants/theme';
 import fonts from './font';
 
-const { GRAY, RED, GREEN, BLUE } = COLORS;
+const { GRAY, GREEN, BLUE } = COLORS;
 const theme = createTheme({
   breakpoints: BREAKPOINTS,
   palette: {
@@ -20,10 +20,6 @@ const theme = createTheme({
     success: {
       main: GREEN[100],
       contrastText: GREEN[800],
-    },
-    error: {
-      main: RED[200],
-      contrastText: RED[800],
     },
     info: {
       main: BLUE[100],
