@@ -4,10 +4,14 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-const Login = () => {
-  const navigate = useNavigate();
+const Login = (): JSX.Element => {
+  /** STATES */
   const [usernameIp, setUsernameIp] = useState('Anonymous');
+
+  /** HOOKS */
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+
   return (
     <Box display="flex" flexDirection="column">
       <Typography variant="h2">Login To Gitspy</Typography>

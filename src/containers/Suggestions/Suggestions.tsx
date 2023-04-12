@@ -1,10 +1,16 @@
-import { Button, Box, TextField, Typography } from '@mui/material';
-import pokemonApi from 'services/pokimonApiSlice';
 import { useState } from 'react';
 
-const Suggestions = () => {
-  const [input, setInput] = useState('');
+import { Button, Box, TextField, Typography } from '@mui/material';
+
+import pokemonApi from '@services/pokimonApiSlice';
+
+const Suggestions = (): JSX.Element => {
+  /** STATES */
+  const [input, setInput] = useState('pikachu');
+
+  /** QUERY HOOKS */
   const [trigger, result] = pokemonApi.useLazyGetPokemonByNameQuery();
+
   const { data, error, isLoading } = result;
 
   if (error) {
@@ -41,4 +47,5 @@ const Suggestions = () => {
     </Box>
   );
 };
+
 export default Suggestions;

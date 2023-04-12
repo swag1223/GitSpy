@@ -25,6 +25,7 @@
     "react/function-component-definition": "off",
     "react/no-array-index-key": "off",
     "no-param-reassign": ["error", { "props": false }],
+    "@typescript-eslint/no-non-null-assertion": "off",
     "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
     "import/extensions": "off",
     "import/prefer-default-export": "off",

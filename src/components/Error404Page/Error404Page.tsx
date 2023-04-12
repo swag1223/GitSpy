@@ -1,4 +1,4 @@
-const Error404Page = () => {
+const Error404Page = (): JSX.Element => {
   return <div>Error404Page</div>;
 };
 

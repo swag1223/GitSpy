@@ -1,10 +1,12 @@
-import Error404Page from '@components/Error404Page/Error404Page';
-import PrivateRoute from '@components/PrivateRoute/PrivateRoute';
-import Profile from '@components/Profile/Profile';
-import Login from '@containers/Login/Login';
-import Suggestions from '@containers/Suggestions/Suggestions';
-import Layout from '@layout/Layout';
 import { createBrowserRouter } from 'react-router-dom';
+
+import { URLS } from '@constants/routes';
+import Error404Page from '@components/Error404Page';
+import PrivateRoute from '@components/PrivateRoute';
+import Profile from '@components/Profile';
+import Login from '@containers/Login';
+import Suggestions from '@containers/Suggestions';
+import Layout from '@layout/index';
 
 const router = createBrowserRouter([
   {
@@ -12,11 +14,11 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        path: '/login',
+        path: URLS.LOGIN,
         element: <Login />,
       },
       {
-        path: '/',
+        path: URLS.PROFILE,
         element: (
           <PrivateRoute>
             <Profile />
@@ -24,7 +26,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/suggestions',
+        path: URLS.SUGGESTIONS,
         element: (
           <PrivateRoute>
             <Suggestions />
@@ -33,7 +35,7 @@ const router = createBrowserRouter([
       },
 
       {
-        path: '*',
+        path: URLS.NOT_FOUND,
         element: <Error404Page />,
       },
     ],
