@@ -7,7 +7,6 @@ const pokemonApi = createApi({
     getPokemonByName: builder.query({
       query: (name) => ({
         url: `pokemon/${name}`,
-        // method: 'HEAD',
       }),
     }),
   }),

@@ -16,11 +16,17 @@ const StyledLoginContainer = styled(Box)(
   })
 );
 
-const StyledForm = styled('form')(() => ({
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'space-between',
-  gap: '15px',
-}));
+const StyledForm = styled('form')(
+  ({
+    theme: {
+      typography: { pxToRem },
+    },
+  }) => ({
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    gap: pxToRem(15),
+  })
+);
 
 export { StyledLoginContainer, StyledForm };

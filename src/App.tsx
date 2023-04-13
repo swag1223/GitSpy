@@ -9,7 +9,7 @@ import router from '@routes/router.config';
 import { store } from './store';
 import theme from './theme';
 
-const App = () => {
+const App = (): JSX.Element => {
   return (
     <Provider store={store}>
       <ThemeProvider theme={theme}>

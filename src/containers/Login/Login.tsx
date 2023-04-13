@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
+import { FormProvider, useForm, SubmitHandler } from 'react-hook-form';
 import cookies from 'browser-cookies';
 import { useSnackbar } from 'notistack';
 
@@ -18,12 +18,14 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
-  const { control, setError, handleSubmit } = useForm<FormDataType>({
+
+  const methods = useForm<FormDataType>({
     defaultValues: {
       username: '',
       password: '',
     },
   });
+  const { setError, handleSubmit } = methods;
 
   // QUERY HOOKS
   const [trigger, result] = githubUserApi.useLazyAuthenticateUserByTokenQuery();
@@ -36,7 +38,7 @@ const Login = () => {
    * @param {FormDataType} formData - The form data to be submitted.
    * @returns {Promise<void>}
    */
-  const onSubmit = async (formData: FormDataType): Promise<void> => {
+  const onSubmit: SubmitHandler<FormDataType> = async (formData) => {
     // async request which may result error
     try {
       const response = (await trigger(
@@ -71,25 +73,17 @@ const Login = () => {
         Login To GitSpy
       </Typography>
 
-      <StyledForm onSubmit={handleSubmit(onSubmit)}>
-        <InputField
-          name="username"
-          label="Username"
-          type="text"
-          control={control}
-        />
+      <FormProvider {...methods}>
+        <StyledForm onSubmit={handleSubmit(onSubmit)}>
+          <InputField name="username" label="Username" type="text" />
 
-        <InputField
-          name="password"
-          label="Password"
-          type="password"
-          control={control}
-        />
+          <InputField name="password" label="Password" type="password" />
 
-        <Button variant="contained" type="submit" size="large">
-          {isLoading ? <CircularProgress size={25} /> : 'Login'}
-        </Button>
-      </StyledForm>
+          <Button variant="contained" type="submit" size="large">
+            {isLoading ? <CircularProgress size={25} /> : 'Login'}
+          </Button>
+        </StyledForm>
+      </FormProvider>
     </StyledLoginContainer>
   );
 };
