@@ -56,9 +56,9 @@ const Navbar = (): JSX.Element => {
             <Button variant="outlined" component={Link} to="/">
               PROFILE
             </Button>
-            <Button variant="outlined" component={Link} to="/login">
+            {/* <Button variant="outlined" component={Link} to="/login">
               Login
-            </Button>
+            </Button> */}
           </Box>
         </Toolbar>
       </AppBar>

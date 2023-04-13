@@ -41,9 +41,9 @@ const Login = () => {
     try {
       const response = (await trigger(
         formData.password
-      ).unwrap()) as UserApiResponseType;
+      ).unwrap()) as UserResponseType;
 
-      if (response.login === formData.username) {
+      if (response.username === formData.username) {
         dispatch(login({ username: formData.username, isLoggedIn: true }));
         cookies.set('token', formData.password);
         navigate('/');
@@ -72,7 +72,7 @@ const Login = () => {
       </Typography>
 
       <StyledForm onSubmit={handleSubmit(onSubmit)}>
-        {/* <InputField name="username" label="Username" type="text" /> */}
+        {/* <InputField name="username" label="Username" type="text"control={control}  /> */}
 
         {/* <InputField name="password" label="Password" type="password" /> */}
         <Controller

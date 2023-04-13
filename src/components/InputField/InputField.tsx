@@ -3,18 +3,18 @@ import { TextField } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
 
 type PropsTypes = {
-  name: string;
+  name: 'username' | 'password';
   label: string;
   type: string;
 };
 const InputField = (props: PropsTypes) => {
-  const { name, label, type } = props;
-  const { control } = useForm<FormDataType>({
-    defaultValues: {
-      username: '',
-      password: '',
-    },
-  });
+  const { name, label, type, control } = props;
+  // const { control } = useForm<FormDataType>({
+  //   defaultValues: {
+  //     username: '',
+  //     password: '',
+  //   },
+  // });
   return (
     <Controller
       control={control}
