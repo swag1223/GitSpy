@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 
-import { URLS } from '@constants/routes';
+import URLS from '@constants/routes';
 import Error404Page from '@components/Error404Page';
 import PrivateRoute from '@components/PrivateRoute';
 import Profile from '@components/Profile';

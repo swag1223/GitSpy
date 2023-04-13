@@ -7,7 +7,7 @@ import { Box, Button, Typography } from '@mui/material';
 import { RootState } from '@store/index';
 import { logout } from '@store/user/userSlice';
 
-const Profile = () => {
+const Profile = (): JSX.Element => {
   const navigate = useNavigate();
   const user = useSelector((state: RootState) => state.user.value);
   const dispatch = useDispatch();

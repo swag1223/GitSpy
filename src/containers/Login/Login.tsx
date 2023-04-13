@@ -1,13 +1,14 @@
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { Controller, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import cookies from 'browser-cookies';
 import { useSnackbar } from 'notistack';
 
-import { Button, CircularProgress, TextField, Typography } from '@mui/material';
+import { Button, CircularProgress, Typography } from '@mui/material';
 
 import githubUserApi from '@services/githubUserApiSlice';
 import { login } from '@store/user/userSlice';
+import InputField from '@components/InputField/InputField';
 
 import { StyledLoginContainer, StyledForm } from './style';
 import { ErrorData, FormDataType } from './types';
@@ -71,40 +72,21 @@ const Login = () => {
       </Typography>
 
       <StyledForm onSubmit={handleSubmit(onSubmit)}>
-        <Controller
-          control={control}
+        <InputField
           name="username"
-          rules={{
-            required: 'Username is required',
-          }}
-          render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <TextField
-              label="Username"
-              onChange={onChange}
-              value={value}
-              error={!!error}
-              helperText={error ? error.message : null}
-            />
-          )}
-        />
-
-        <Controller
+          label="Username"
+          type="text"
           control={control}
-          name="password"
-          rules={{ required: 'Password is required' }}
-          render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <TextField
-              type="password"
-              label="Password"
-              onChange={onChange}
-              value={value}
-              error={!!error}
-              helperText={error ? error.message : null}
-            />
-          )}
         />
 
-        <Button variant="contained" type="submit" sx={{ padding: '10px' }}>
+        <InputField
+          name="password"
+          label="Password"
+          type="password"
+          control={control}
+        />
+
+        <Button variant="contained" type="submit" size="large">
           {isLoading ? <CircularProgress size={25} /> : 'Login'}
         </Button>
       </StyledForm>
