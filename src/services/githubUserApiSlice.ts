@@ -11,7 +11,38 @@ const githubUserApi = createApi({
           Authorization: `Bearer ${token}`,
         },
       }),
+      transformResponse: ({
+        avatar_url: avatarUrl,
+        login: username,
+        email,
+        name,
+        bio,
+        location,
+        public_repos: publicRepos,
+        following,
+        followers,
+        blog,
+        html_url: githubProfile,
+      }: UserApiResponseType) => ({
+        avatarUrl,
+        username,
+        email,
+        name,
+        bio,
+        location,
+        publicRepos,
+        following,
+        followers,
+        blog,
+        githubProfile,
+      }),
     }),
+
+    // getUser: builder.query({
+    //   query: (username) => ({
+    //     url: `users/${username}`,
+    //   }),
+    // }),
   }),
 });
 

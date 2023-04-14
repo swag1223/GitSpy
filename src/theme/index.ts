@@ -8,11 +8,11 @@ const { GRAY, GREEN, BLUE } = COLORS;
 const theme = createTheme({
   breakpoints: BREAKPOINTS,
   palette: {
-    primary: {
-      main: GREEN[500],
-      light: GREEN[100],
-      dark: GREEN[800],
-    },
+    // primary: {
+    //   main: BLUE[300],
+    //   light: BLUE[100],
+    //   dark: BLUE[800],
+    // },
     secondary: {
       main: GRAY[500],
       light: GRAY[400],
@@ -33,7 +33,7 @@ const theme = createTheme({
   },
   spacing: 4,
   shape: {
-    borderRadius: 10,
+    borderRadius: 6,
   },
   components: {
     MuiCssBaseline: {

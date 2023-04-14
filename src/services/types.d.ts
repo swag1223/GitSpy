@@ -32,3 +32,38 @@ type UserApiResponseType = {
   updated_at?: string;
   url?: string;
 };
+
+type UserResponseType = {
+  avatarUrl?: string;
+  bio?: string;
+  blog?: string;
+  company?: string;
+  createdAt?: string;
+  email?: string;
+  eventsUrl?: string;
+  followers?: number;
+  followersUrl?: string;
+  following?: number;
+  followingUrl?: string;
+  gistsUrl?: string;
+  gravatarId?: string;
+  hireable?: null;
+  githubProfile?: string;
+  id?: number;
+  location?: string;
+  username?: string;
+  name?: string;
+  nodeId?: string;
+  organizationsUrl?: string;
+  publicGists?: number;
+  publicRepos?: number;
+  receivedEventsUrl?: string;
+  reposUrl?: string;
+  siteAdmin?: boolean;
+  starredUrl?: string;
+  subscriptionsUrl?: string;
+  twitterUsername?: string;
+  type?: string;
+  updatedAt?: string;
+  url?: string;
+};
