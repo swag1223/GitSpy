@@ -3,4 +3,5 @@ type InputFieldPropsTypes = {
   label: string;
   type: string;
 };
+
 export type { InputFieldPropsTypes };
