@@ -1,5 +1,5 @@
 import { COLORS } from '@constants/theme';
-import { Avatar, Box, styled } from '@mui/material';
+import { Avatar, Box, styled, Typography } from '@mui/material';
 
 const StyledUserCardContainer = styled(Box)(
   ({
@@ -38,4 +38,10 @@ const StyledAvatar = styled(Avatar)(
     boxShadow: shadows[1],
   })
 );
-export { StyledUserCardContainer, StyledAvatar };
+
+const StyledTypography = styled(Typography)(() => ({
+  display: 'flex',
+  alignItems: 'center',
+}));
+
+export { StyledUserCardContainer, StyledAvatar, StyledTypography };

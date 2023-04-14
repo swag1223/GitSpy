@@ -7,12 +7,16 @@ import BookOutlinedIcon from '@mui/icons-material/BookOutlined';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkIcon from '@mui/icons-material/Link';
 
-import { FONT_WEIGHTS } from '@constants/theme';
+import UserInfo from '@components/UserInfo/UserInfo';
 
-import { StyledAvatar, StyledUserCardContainer } from './style';
+import {
+  StyledAvatar,
+  StyledTypography,
+  StyledUserCardContainer,
+} from './style';
 import { UserPropTypes } from './type';
 
-const UserProfile = ({ data }: UserPropTypes) => {
+const UserProfile = ({ data }: UserPropTypes): JSX.Element => {
   const {
     avatarUrl,
     name,
@@ -30,7 +34,6 @@ const UserProfile = ({ data }: UserPropTypes) => {
   return (
     <StyledUserCardContainer>
       <StyledAvatar src={avatarUrl} alt={name} />
-
       <Box display="flex" flexDirection="column" alignItems="center">
         <Typography variant="h2" color="secondary.dark">
           {username}
@@ -41,82 +44,34 @@ const UserProfile = ({ data }: UserPropTypes) => {
           </Typography>
         )}
         {email && (
-          <Typography
-            variant="body2"
-            color="secondary.main"
-            sx={{ display: 'flex', alignItems: 'center' }}
-          >
+          <StyledTypography variant="body2" color="secondary.main">
             {email}
-          </Typography>
+          </StyledTypography>
         )}
-        <Typography variant="body2">{bio}</Typography>
+        {bio && <Typography variant="body2">{bio}</Typography>}
         {location && (
-          <Typography
-            variant="body2"
-            color="secondary.main"
-            sx={{ display: 'flex', alignItems: 'center' }}
-          >
+          <StyledTypography variant="body2" color="secondary.main">
             {location}
-          </Typography>
+          </StyledTypography>
         )}
       </Box>
-
-      <Box display="flex" gap="20px">
-        <Box textAlign="center">
-          <Typography
-            color="primary.main"
-            fontWeight={FONT_WEIGHTS.BOLD}
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <BookOutlinedIcon fontSize="small" />
-            {publicRepos}
-          </Typography>
-          <Typography variant="body2" color="primary.main">
-            REPOS
-          </Typography>
-        </Box>
-        <Box textAlign="center">
-          <Typography
-            // variant="body2"
-            color="primary.main"
-            fontWeight={FONT_WEIGHTS.BOLD}
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <SupervisorAccountOutlinedIcon fontSize="small" />
-            {following}
-          </Typography>
-          <Typography variant="body2" color="primary.main">
-            FOLLOWING
-          </Typography>
-        </Box>
-        <Box textAlign="center">
-          <Typography
-            // variant="body2"
-            color="primary.main"
-            fontWeight={FONT_WEIGHTS.BOLD}
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <PeopleOutlinedIcon fontSize="small" />
-            {followers}
-          </Typography>
-          <Typography variant="body2" color="primary.main">
-            FOLLOWERS
-          </Typography>
-        </Box>
+      <Box display="flex" gap={10}>
+        <UserInfo
+          info={publicRepos}
+          text="REPOS"
+          icon={<BookOutlinedIcon fontSize="small" />}
+        />
+        <UserInfo
+          info={following}
+          text="FOLLOWING"
+          icon={<SupervisorAccountOutlinedIcon fontSize="small" />}
+        />
+        <UserInfo
+          info={followers}
+          text="FOLLOWERS"
+          icon={<PeopleOutlinedIcon fontSize="small" />}
+        />
       </Box>
-
       <Box display="flex" gap={5}>
         {blog && (
           <Button component={Link} to={blog} target="_blank" variant="outlined">
