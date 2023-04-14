@@ -1,3 +1,1 @@
-import PrivateRoute from './PrivateRoute';
-
-export default PrivateRoute;
+export { default } from './PrivateRoute';

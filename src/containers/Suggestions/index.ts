@@ -1,3 +1,1 @@
-import Suggestions from './Suggestions';
-
-export default Suggestions;
+export { default } from './Suggestions';

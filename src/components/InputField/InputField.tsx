@@ -1,20 +1,13 @@
-import { FormDataType } from '@containers/Login/types';
-import { TextField } from '@mui/material';
-import { Controller, useForm } from 'react-hook-form';
+import { Controller, useFormContext } from 'react-hook-form';
 
-type PropsTypes = {
-  name: 'username' | 'password';
-  label: string;
-  type: string;
-};
-const InputField = (props: PropsTypes) => {
-  const { name, label, type, control } = props;
-  // const { control } = useForm<FormDataType>({
-  //   defaultValues: {
-  //     username: '',
-  //     password: '',
-  //   },
-  // });
+import { TextField } from '@mui/material';
+
+import { InputFieldPropsTypes } from './types';
+
+const InputField = (props: InputFieldPropsTypes): JSX.Element => {
+  const { name, label, type } = props;
+  const { control } = useFormContext();
+
   return (
     <Controller
       control={control}
