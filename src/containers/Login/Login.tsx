@@ -8,7 +8,7 @@ import { Button, CircularProgress, Typography } from '@mui/material';
 
 import githubUserApi from '@services/githubUserApiSlice';
 import { login } from '@store/user/userSlice';
-import InputField from '@components/InputField/InputField';
+import InputField from '@components/InputField';
 
 import { StyledLoginContainer, StyledForm } from './style';
 import { ErrorData, FormDataType } from './types';
@@ -72,13 +72,10 @@ const Login = () => {
       >
         Login To GitSpy
       </Typography>
-
       <FormProvider {...methods}>
         <StyledForm onSubmit={handleSubmit(onSubmit)}>
           <InputField name="username" label="Username" type="text" />
-
           <InputField name="password" label="Password" type="password" />
-
           <Button variant="contained" type="submit" size="large">
             {isLoading ? <CircularProgress size={25} /> : 'Login'}
           </Button>
