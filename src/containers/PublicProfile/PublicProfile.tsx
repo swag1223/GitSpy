@@ -17,8 +17,8 @@ const PublicProfile = (): JSX.Element => {
     // results in infinite loop
     // return <Navigate to="/*" />;
     if (error.status === 404) {
-      // return <Error404Page />;
-      return <Navigate to="*" />;
+      return <Error404Page />;
+      // return <Navigate to="*" />;
     }
     // return <Error404Page />;
   }

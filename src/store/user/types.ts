@@ -1,6 +1,7 @@
 type UserStateValue = {
   username: string;
   isLoggedIn: boolean;
+  token: string | null;
 };
 
 type UserState = {

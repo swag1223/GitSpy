@@ -1,9 +1,10 @@
+import cookies from 'browser-cookies';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { UserState, UserStateValue } from './types';
 
 const initialState: UserState = {
-  value: { username: '', isLoggedIn: false },
+  value: { username: '', isLoggedIn: false, token: cookies.get('token') },
 };
 
 const userSlice = createSlice({

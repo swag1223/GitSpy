@@ -44,7 +44,13 @@ const Login = () => {
       ).unwrap()) as UserResponseType;
 
       if (response.username === formData.username) {
-        dispatch(login({ username: formData.username, isLoggedIn: true }));
+        dispatch(
+          login({
+            username: formData.username,
+            isLoggedIn: true,
+            token: formData.password,
+          })
+        );
         cookies.set('token', formData.password);
         navigate('/');
       } else {

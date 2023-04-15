@@ -27,15 +27,18 @@ import githubUserApi, {
 import SearchResultItem from '@components/SearchResultItem/SearchResultItem';
 import { StyledTextField } from '@components/Searchbar/style';
 import { logout } from '@store/user/userSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@store/index';
 
 const Navbar = (): JSX.Element => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   // TODO :MOVE TO SEPARATE STYLE FILE
 
-  const authToken = cookies.get('token');
-  console.log('auth:', authToken);
+  // const authToken = cookies.get('token');
+  // console.log('auth:', authToken);
+  const { token } = useSelector((state: RootState) => state.user.value);
+  console.log(token);
 
   // const Search = styled('div')(({ theme }) => ({
   //   position: 'relative',
@@ -147,12 +150,12 @@ const Navbar = (): JSX.Element => {
             <Button variant="outlined" component={NavLink} to="/suggestions">
               Suggestions
             </Button>
-            {authToken && (
+            {token && (
               <Button variant="outlined" component={NavLink} to="/">
                 PROFILE
               </Button>
             )}
-            {!authToken ? (
+            {!token ? (
               <Button variant="outlined" component={NavLink} to="/login">
                 Login
               </Button>
@@ -160,9 +163,9 @@ const Navbar = (): JSX.Element => {
               <Button
                 variant="contained"
                 onClick={() => {
-                  // dispatch(logout());
                   cookies.erase('token');
-                  // navigate('/login');
+                  dispatch(logout());
+                  navigate('/login');
                 }}
               >
                 Logout

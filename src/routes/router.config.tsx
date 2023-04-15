@@ -14,17 +14,17 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       {
+        index: true,
+        path: URLS.LOGIN,
+        element: <Login />,
+      },
+      {
         path: URLS.PROFILE,
         element: (
           <PrivateRoute>
             <Profile />
           </PrivateRoute>
         ),
-      },
-      {
-        index: true,
-        path: URLS.LOGIN,
-        element: <Login />,
       },
 
       {
