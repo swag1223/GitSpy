@@ -1,4 +1,6 @@
-import { Link } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { skipToken } from '@reduxjs/toolkit/query';
+import cookies from 'browser-cookies';
 // import { debounce } from 'lodash';
 
 import AppBar from '@mui/material/AppBar';
@@ -8,20 +10,32 @@ import Typography from '@mui/material/Typography';
 import {
   Autocomplete,
   Button,
+  CircularProgress,
   InputAdornment,
   InputBase,
   styled,
   TextField,
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
+import { useDebounce } from 'use-debounce';
 import SearchBar from '@components/Searchbar/Searchbar';
 import { useEffect, useState } from 'react';
-import { useGetSearchedUsersQuery } from '@services/githubUserApiSlice';
+import githubUserApi, {
+  useGetSearchedUsersQuery,
+} from '@services/githubUserApiSlice';
+// import { useGetSearchedUsersQuery } from '@services/githubUserApiSlice';
 import SearchResultItem from '@components/SearchResultItem/SearchResultItem';
 import { StyledTextField } from '@components/Searchbar/style';
+import { logout } from '@store/user/userSlice';
+import { useDispatch } from 'react-redux';
 
 const Navbar = (): JSX.Element => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   // TODO :MOVE TO SEPARATE STYLE FILE
+
+  const authToken = cookies.get('token');
+  console.log('auth:', authToken);
 
   // const Search = styled('div')(({ theme }) => ({
   //   position: 'relative',
@@ -51,22 +65,21 @@ const Navbar = (): JSX.Element => {
   // }));
 
   const [searchInput, setSearchInput] = useState('');
+
   // const [searchUserResults, setSearchUserResults] = useState([]);
-  // const debouncedSearchQuery = useDebounce(searchInput, 500);
+  const [debouncedSearchQuery] = useDebounce(searchInput, 1000);
 
   // Debounce search term so that it only gives us latest value ...
   // ... if searchTerm has not been updated within last 500ms.
   // The goal is to only have the API call fire when user stops typing ...
   // ... so that we aren't hitting our API rapidly.
 
-  // const { data } = useGetSearchedUsersQuery(debouncedSearchQuery, {
-  //   skip: debouncedSearchQuery === '',
-  // });
-  const { data } = useGetSearchedUsersQuery(searchInput);
+  const { data, isLoading, isFetching } = useGetSearchedUsersQuery(
+    debouncedSearchQuery || skipToken
+  );
 
-  // if (error) return <>OOPS !!</>;
-  // if (isLoading) return <>LOading...</>;
-  // console.log(data);
+  console.log(isLoading);
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="sticky" sx={{ backgroundColor: 'white' }} elevation={1}>
@@ -82,21 +95,29 @@ const Navbar = (): JSX.Element => {
           </Search> */}
 
           <Autocomplete
-            // open
-            getOptionLabel={(option) => option.login}
+            forcePopupIcon={false}
+            loading={isFetching}
             inputValue={searchInput}
             options={data ? data.items : []}
+            getOptionLabel={(option) => option.login}
             noOptionsText="No User Found!!"
             renderOption={(props, option) => (
-              <SearchResultItem {...props} option={option} />
+              <SearchResultItem
+                {...props}
+                option={option}
+                // onClick={handleSelectedOption}
+              />
             )}
-            onInputChange={(e, newValue) => setSearchInput(newValue)}
-            freeSolo
-            // filterOptions={(x) => x}
-            // isOptionEqualToValue={(option, value) =>
-            //   option.login === value.login
-            // }
-
+            onInputChange={(e, newValue, reason) => {
+              setSearchInput(newValue);
+            }}
+            onChange={(e, val, reason) => {
+              console.log(val);
+              if (reason === 'selectOption') {
+                navigate(`/${val.login}`);
+              }
+            }}
+            filterOptions={(x) => x}
             renderInput={(params) => (
               <StyledTextField
                 {...params}
@@ -108,33 +129,45 @@ const Navbar = (): JSX.Element => {
                       <SearchIcon />
                     </InputAdornment>
                   ),
+                  endAdornment: (
+                    <>
+                      {isFetching ? (
+                        <CircularProgress color="inherit" size={20} />
+                      ) : null}
+                      {params.InputProps.endAdornment}
+                    </>
+                  ),
                 }}
               />
             )}
           />
-          {/* <SearchBar
-          
-            getOptionLabel={(option) => option.login}
-            inputValue={searchInput}
-            options={data || []}
-            noOptionsText="No User Found!!"
-            renderOption={(props, option) => (
-              <SearchResultItem {...props} option={option} />
-            )}
-            onInputChange={(e, newValue) => setSearchInput(newValue)}
-            freeSolo
-          /> */}
+
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: 'flex', gap: '10px' }}>
-            <Button variant="outlined" component={Link} to="/suggestions">
+            <Button variant="outlined" component={NavLink} to="/suggestions">
               Suggestions
             </Button>
-            <Button variant="outlined" component={Link} to="/">
-              PROFILE
-            </Button>
-            {/* <Button variant="outlined" component={Link} to="/login">
-              Login
-            </Button> */}
+            {authToken && (
+              <Button variant="outlined" component={NavLink} to="/">
+                PROFILE
+              </Button>
+            )}
+            {!authToken ? (
+              <Button variant="outlined" component={NavLink} to="/login">
+                Login
+              </Button>
+            ) : (
+              <Button
+                variant="contained"
+                onClick={() => {
+                  // dispatch(logout());
+                  cookies.erase('token');
+                  // navigate('/login');
+                }}
+              >
+                Logout
+              </Button>
+            )}
           </Box>
         </Toolbar>
       </AppBar>

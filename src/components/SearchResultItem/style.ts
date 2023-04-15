@@ -1,4 +1,4 @@
-import { styled, Box } from '@mui/material';
+import { styled, Box, Button } from '@mui/material';
 
 const StyledSearchResultItem = styled(Box)(
   ({

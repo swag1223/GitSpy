@@ -1,0 +1,6 @@
+//  Converts pixel values to rem values using math operations.
+@use 'sass:math';
+
+@function rem($pxValue) {
+  @return math.div($pxValue, 10) * 1rem;
+}

@@ -5,6 +5,7 @@ import { PrivateRoutePropTypes } from './types';
 
 const PrivateRoute = ({ children }: PrivateRoutePropTypes): JSX.Element => {
   const authToken = cookies.get('token');
+  // console.log('private');
   return !authToken ? <Navigate to="/login" /> : children;
 };
 

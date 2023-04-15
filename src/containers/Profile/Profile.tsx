@@ -10,11 +10,11 @@ import UserProfile from '@components/UserProfile';
 
 const Profile = (): JSX.Element => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const token = cookies.get('token');
   const { data, error, isLoading } = useAuthenticateUserByTokenQuery(token);
 
-  console.log(data);
+  // console.log(data);
   if (error) {
     return <>OOPS!! something went wrong</>;
   }
@@ -25,7 +25,7 @@ const Profile = (): JSX.Element => {
   return (
     <Box display="flex" flexDirection="column" gap={2}>
       {data && <UserProfile data={data} />}
-      <Button
+      {/* <Button
         variant="contained"
         onClick={() => {
           dispatch(logout());
@@ -34,7 +34,7 @@ const Profile = (): JSX.Element => {
         }}
       >
         Logout
-      </Button>
+      </Button> */}
     </Box>
   );
 };

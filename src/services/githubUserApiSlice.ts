@@ -40,18 +40,21 @@ const githubUserApi = createApi({
 
     getSearchedUsers: builder.query({
       query: (username) => ({
-        url: `search/users?q=${username}`,
+        url: `search/users?q=${username}&per_page=10`,
       }),
     }),
 
-    // getUser: builder.query({
-    //   query: (username) => ({
-    //     url: `users/${username}`,
-    //   }),
-    // }),
+    getUser: builder.query({
+      query: (username) => ({
+        url: `users/${username}`,
+      }),
+    }),
   }),
 });
 
-export const { useAuthenticateUserByTokenQuery, useGetSearchedUsersQuery } =
-  githubUserApi;
+export const {
+  useAuthenticateUserByTokenQuery,
+  useGetSearchedUsersQuery,
+  useGetUserQuery,
+} = githubUserApi;
 export default githubUserApi;

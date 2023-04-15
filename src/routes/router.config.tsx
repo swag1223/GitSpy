@@ -3,20 +3,16 @@ import { createBrowserRouter } from 'react-router-dom';
 import URLS from '@constants/routes';
 import Error404Page from '@components/Error404Page';
 import PrivateRoute from '@components/PrivateRoute';
-import Profile from '@components/Profile';
+import Profile from '@containers/Profile';
 import Login from '@containers/Login';
 import Suggestions from '@containers/Suggestions';
 import Layout from '@layout/index';
+import PublicProfile from '@containers/PublicProfile/PublicProfile';
 
 const router = createBrowserRouter([
   {
     element: <Layout />,
     children: [
-      {
-        index: true,
-        path: URLS.LOGIN,
-        element: <Login />,
-      },
       {
         path: URLS.PROFILE,
         element: (
@@ -26,12 +22,22 @@ const router = createBrowserRouter([
         ),
       },
       {
+        index: true,
+        path: URLS.LOGIN,
+        element: <Login />,
+      },
+
+      {
         path: URLS.SUGGESTIONS,
         element: (
           <PrivateRoute>
             <Suggestions />
           </PrivateRoute>
         ),
+      },
+      {
+        path: URLS.USERNAME,
+        element: <PublicProfile />,
       },
 
       {

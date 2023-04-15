@@ -1,4 +1,5 @@
 import { Avatar, Box, Typography } from '@mui/material';
+
 import { StyledSearchResultItem } from './style';
 
 const SearchResultItem = (props) => {
