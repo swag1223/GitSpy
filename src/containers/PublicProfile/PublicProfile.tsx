@@ -2,22 +2,27 @@ import Error404Page from '@components/Error404Page';
 import UserProfile from '@components/UserProfile';
 import { CircularProgress } from '@mui/material';
 import { useGetUserQuery } from '@services/githubUserApiSlice';
-import React from 'react';
+import { setError } from '@store/error/errorSlice';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { Navigate, useParams } from 'react-router-dom';
 
-const PublicProfile = (): JSX.Element => {
+const PublicProfile = () => {
   const { username } = useParams();
   console.log(username);
-  // const search = useLocation().search;
-  // const id = new URLSearchParams(search).get("code");
+
+  const dispatch = useDispatch();
+
   const { data, error, isLoading } = useGetUserQuery(username);
-  console.log(data, error);
+  console.log('public profile called query');
 
   if (error) {
     // results in infinite loop
     // return <Navigate to="/*" />;
     if (error.status === 404) {
-      return <Error404Page />;
+      // return <Error404Page />;
+      dispatch(setError(true));
+
       // return <Navigate to="*" />;
     }
     // return <Error404Page />;
@@ -26,7 +31,7 @@ const PublicProfile = (): JSX.Element => {
   if (isLoading) {
     return <CircularProgress />;
   }
-  return <UserProfile data={data} />;
+  return data && <UserProfile data={data} />;
 };
 
 export default PublicProfile;

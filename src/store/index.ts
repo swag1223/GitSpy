@@ -4,9 +4,11 @@ import githubUserApi from '@services/githubUserApiSlice';
 import pokemonApi from '@services/pokimonApiSlice';
 
 import userSliceReducer from './user/userSlice';
+import errorReducer from './error/errorSlice';
 
 const rootReducer = combineReducers({
   user: userSliceReducer,
+  error: errorReducer,
   [pokemonApi.reducerPath]: pokemonApi.reducer,
   [githubUserApi.reducerPath]: githubUserApi.reducer,
 });
