@@ -3,7 +3,6 @@ import { Outlet, useLocation } from 'react-router-dom';
 import { Box } from '@mui/material';
 
 import Navbar from '@containers/Navbar';
-import { COLORS } from '@constants/theme';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@store/index';
 import Error404Page from '@components/Error404Page';

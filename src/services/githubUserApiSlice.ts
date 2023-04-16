@@ -1,8 +1,11 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import camelcaseKeys from 'camelcase-keys';
+
+import CONSTANTS from '@constants/constants';
 
 const githubUserApi = createApi({
   reducerPath: 'githubUserApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://api.github.com/' }),
+  baseQuery: fetchBaseQuery({ baseUrl: CONSTANTS.GITHUB_BASE_URL }),
   endpoints: (builder) => ({
     authenticateUserByToken: builder.query({
       query: (token) => ({
@@ -11,31 +14,8 @@ const githubUserApi = createApi({
           Authorization: `Bearer ${token}`,
         },
       }),
-      transformResponse: ({
-        avatar_url: avatarUrl,
-        login: username,
-        email,
-        name,
-        bio,
-        location,
-        public_repos: publicRepos,
-        following,
-        followers,
-        blog,
-        html_url: githubProfile,
-      }: UserApiResponseType) => ({
-        avatarUrl,
-        username,
-        email,
-        name,
-        bio,
-        location,
-        publicRepos,
-        following,
-        followers,
-        blog,
-        githubProfile,
-      }),
+      transformResponse: (response: UserApiResponseType): UserResponseType =>
+        camelcaseKeys(response),
     }),
 
     getSearchedUsers: builder.query({
@@ -48,6 +28,8 @@ const githubUserApi = createApi({
       query: (username) => ({
         url: `users/${username}`,
       }),
+      transformResponse: (response: UserApiResponseType): UserResponseType =>
+        camelcaseKeys(response),
     }),
   }),
 });
