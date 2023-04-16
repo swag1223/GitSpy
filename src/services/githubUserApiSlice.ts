@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import camelcaseKeys from 'camelcase-keys';
 
 import CONSTANTS from '@constants/constants';
 
@@ -13,38 +14,9 @@ const githubUserApi = createApi({
           Authorization: `Bearer ${token}`,
         },
       }),
-      transformResponse: ({
-        avatar_url: avatarUrl,
-        login: username,
-        email,
-        name,
-        bio,
-        location,
-        public_repos: publicRepos,
-        following,
-        followers,
-        blog,
-        html_url: githubProfile,
-      }: UserApiResponseType) => ({
-        avatarUrl,
-        username,
-        email,
-        name,
-        bio,
-        location,
-        publicRepos,
-        following,
-        followers,
-        blog,
-        githubProfile,
-      }),
+      transformResponse: (response: UserApiResponseType): UserResponseType =>
+        camelcaseKeys(response),
     }),
-
-    // getUser: builder.query({
-    //   query: (username) => ({
-    //     url: `users/${username}`,
-    //   }),
-    // }),
   }),
 });
 

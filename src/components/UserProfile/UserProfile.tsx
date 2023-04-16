@@ -20,7 +20,7 @@ const UserProfile = ({ data }: UserPropTypes): JSX.Element => {
   const {
     avatarUrl,
     name,
-    username,
+    login,
     email,
     bio,
     location,
@@ -28,7 +28,7 @@ const UserProfile = ({ data }: UserPropTypes): JSX.Element => {
     following,
     followers,
     blog,
-    githubProfile,
+    htmlUrl,
   } = data;
 
   return (
@@ -36,7 +36,7 @@ const UserProfile = ({ data }: UserPropTypes): JSX.Element => {
       <StyledAvatar src={avatarUrl} alt={name} />
       <Box display="flex" flexDirection="column" alignItems="center">
         <Typography variant="h2" color="secondary.dark">
-          {username}
+          {login}
         </Typography>
         {name && (
           <Typography variant="h4" color="secondary.light">
@@ -79,10 +79,10 @@ const UserProfile = ({ data }: UserPropTypes): JSX.Element => {
             BLOG
           </Button>
         )}
-        {githubProfile && (
+        {htmlUrl && (
           <Button
             component={Link}
-            to={githubProfile}
+            to={htmlUrl}
             target="_blank"
             variant="outlined"
           >

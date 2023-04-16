@@ -42,7 +42,7 @@ const Login = () => {
         formData.password
       ).unwrap()) as UserResponseType;
 
-      if (response.username === formData.username) {
+      if (response.login === formData.username) {
         dispatch(login({ username: formData.username, isLoggedIn: true }));
         cookies.set('token', formData.password);
         navigate('/');
