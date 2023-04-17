@@ -1,7 +1,19 @@
+#root {
+  // background-color: black;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 a {
   text-decoration: none;
 }
 
 a.active {
-  color: purple;
+  color: white;
+  background-color: #1976d2;
+
+  &:hover {
+    background-color: #4a80b6;
+  }
 }

@@ -16,12 +16,12 @@ const Profile = (): JSX.Element => {
   const { token } = useSelector((state: RootState) => state.user.value);
   const { data, error, isLoading } = useAuthenticateUserByTokenQuery(token);
 
-  console.log('private profile called query');
+  // console.log('private profile called query');
   if (error) {
     return <>OOPS!! something went wrong profile api error</>;
   }
   if (isLoading) {
-    return <CircularProgress size={50} />;
+    return <CircularProgress size={200} />;
   }
 
   return (

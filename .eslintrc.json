@@ -23,6 +23,7 @@
     "prettier/prettier": "error",
     "react/react-in-jsx-scope": "off",
     "react/function-component-definition": "off",
+    "react/prop-types": "off",
     "react/no-array-index-key": "off",
     "react/jsx-props-no-spreading": "off",
     "no-param-reassign": ["error", { "props": false }],

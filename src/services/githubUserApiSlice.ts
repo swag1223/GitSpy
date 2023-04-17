@@ -2,10 +2,21 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import camelcaseKeys from 'camelcase-keys';
 
 import CONSTANTS from '@constants/constants';
+import { RootState } from '@store/index';
 
 const githubUserApi = createApi({
   reducerPath: 'githubUserApi',
-  baseQuery: fetchBaseQuery({ baseUrl: CONSTANTS.GITHUB_BASE_URL }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: CONSTANTS.GITHUB_BASE_URL,
+    prepareHeaders: (headers, { getState }) => {
+      const { token } = (getState() as RootState).user.value;
+
+      if (token) {
+        headers.set('authorization', `Bearer ${token}`);
+      }
+      return headers;
+    },
+  }),
   endpoints: (builder) => ({
     authenticateUserByToken: builder.query({
       query: (token) => ({

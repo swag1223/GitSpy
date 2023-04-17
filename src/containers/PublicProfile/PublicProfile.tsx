@@ -9,29 +9,33 @@ import { Navigate, useParams } from 'react-router-dom';
 
 const PublicProfile = () => {
   const { username } = useParams();
-  console.log(username);
+  // console.log(username);
 
   const dispatch = useDispatch();
 
   const { data, error, isLoading } = useGetUserQuery(username);
-  console.log('public profile called query');
+  // console.log('public profile called query');
+  // console.log(data);
 
-  if (error) {
-    // results in infinite loop
-    // return <Navigate to="/*" />;
-    if (error.status === 404) {
+  useEffect(() => {
+    if (error) {
+      // results in infinite loop
+      // return <Navigate to="/*" />;
+      if (error.status === 404) {
+        // return <Error404Page />;
+        dispatch(setError(true));
+
+        // return <Navigate to="*" />;
+      }
+
       // return <Error404Page />;
-      dispatch(setError(true));
-
-      // return <Navigate to="*" />;
     }
-    // return <Error404Page />;
-  }
+  }, [error, dispatch]);
 
   if (isLoading) {
     return <CircularProgress />;
   }
-  return data && <UserProfile data={data} />;
+  return data && <UserProfile data={data} isPublic />;
 };
 
 export default PublicProfile;

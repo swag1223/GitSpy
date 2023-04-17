@@ -4,6 +4,7 @@ import { SnackbarProvider } from 'notistack';
 
 import { CssBaseline, ThemeProvider } from '@mui/material';
 
+import '@styles/main.scss';
 import router from '@routes/router.config';
 
 import { store } from './store';

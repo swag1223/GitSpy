@@ -1,4 +1,5 @@
-import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { FormProvider, useForm, SubmitHandler } from 'react-hook-form';
 import cookies from 'browser-cookies';
@@ -6,15 +7,19 @@ import { useSnackbar } from 'notistack';
 
 import { Button, CircularProgress, Typography } from '@mui/material';
 
+import InputField from '@components/InputField';
 import githubUserApi from '@services/githubUserApiSlice';
 import { login } from '@store/user/userSlice';
-import InputField from '@components/InputField';
+import { RootState } from '@store/index';
 
+import URLS from '@constants/routes';
+import CONSTANTS from '@constants/constants';
 import { StyledLoginContainer, StyledForm } from './style';
 import { ErrorData, FormDataType } from './types';
 
 const Login = () => {
   // HOOKS
+  const { token } = useSelector((state: RootState) => state.user.value);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
@@ -42,7 +47,7 @@ const Login = () => {
         formData.password
       ).unwrap()) as UserResponseType;
 
-      if (response.username === formData.username) {
+      if (response.login === formData.username) {
         dispatch(
           login({
             username: formData.username,
@@ -54,18 +59,31 @@ const Login = () => {
         navigate('/');
       } else {
         // handles invalid username error
-        setError('username', { type: 'custom', message: 'Invalid Username !' });
+        setError('username', {
+          type: 'custom',
+          message: 'Invalid Username !',
+        });
       }
     } catch (e: unknown) {
       const { data } = e as Record<string, ErrorData>;
       // handle errors coming from github api request
       if ((e as Record<string, number>).status === 401) {
-        setError('password', { type: 'custom', message: 'Invalid Password !' });
+        setError('password', {
+          type: 'custom',
+          message: 'Invalid Password !',
+        });
       } else {
         enqueueSnackbar(data.message, { variant: 'error' });
       }
     }
   };
+
+  /** to handle if loggedIn and on url change to login , navigate to home */
+  useEffect(() => {
+    if (token) {
+      navigate('/');
+    }
+  }, [token, navigate]);
 
   return (
     <StyledLoginContainer>

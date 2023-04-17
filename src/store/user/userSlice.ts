@@ -16,7 +16,7 @@ const userSlice = createSlice({
     },
 
     logout: (state: UserState) => {
-      state.value = initialState.value;
+      state.value = { ...initialState.value, token: null };
     },
   },
 });

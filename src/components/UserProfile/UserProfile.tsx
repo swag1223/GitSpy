@@ -9,6 +9,7 @@ import LinkIcon from '@mui/icons-material/Link';
 
 import UserInfo from '@components/UserInfo/UserInfo';
 
+import { useState } from 'react';
 import {
   StyledAvatar,
   StyledTypography,
@@ -16,11 +17,14 @@ import {
 } from './style';
 import { UserPropTypes } from './type';
 
-const UserProfile = ({ data }: UserPropTypes): JSX.Element => {
+const UserProfile = ({
+  data,
+  isPublic = false,
+}: UserPropTypes): JSX.Element => {
   const {
     avatarUrl,
     name,
-    login,
+    login = 'GITHUB USER',
     email,
     bio,
     location,
@@ -30,6 +34,9 @@ const UserProfile = ({ data }: UserPropTypes): JSX.Element => {
     blog,
     htmlUrl,
   } = data;
+
+  const [follow, setFollow] = useState('FOLLOW');
+  const [followersCount, setFollowersCount] = useState(followers);
 
   return (
     <StyledUserCardContainer>
@@ -57,17 +64,17 @@ const UserProfile = ({ data }: UserPropTypes): JSX.Element => {
       </Box>
       <Box display="flex" gap={10}>
         <UserInfo
-          info={publicRepos}
+          info={publicRepos || 0}
           text="REPOS"
           icon={<BookOutlinedIcon fontSize="small" />}
         />
         <UserInfo
-          info={following}
+          info={following || 0}
           text="FOLLOWING"
           icon={<SupervisorAccountOutlinedIcon fontSize="small" />}
         />
         <UserInfo
-          info={followers}
+          info={followersCount || 0}
           text="FOLLOWERS"
           icon={<PeopleOutlinedIcon fontSize="small" />}
         />
@@ -91,6 +98,22 @@ const UserProfile = ({ data }: UserPropTypes): JSX.Element => {
           </Button>
         )}
       </Box>
+      {isPublic && (
+        <Button
+          variant="contained"
+          onClick={(e) => {
+            if ((e.target as HTMLElement).innerText === 'FOLLOW') {
+              setFollow('UNFOLLOW');
+              setFollowersCount(followersCount + 1);
+            } else {
+              setFollow('FOLLOW');
+              setFollowersCount(followersCount - 1);
+            }
+          }}
+        >
+          {follow}
+        </Button>
+      )}
     </StyledUserCardContainer>
   );
 };
