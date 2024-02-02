@@ -22,7 +22,12 @@ Utilized GitHub Auth for login and interfaced with the GitHub API for data retri
 
 ## Screenshots
 
-//will add later
+![image](https://github.com/swag1223/GitSpy/assets/83612016/23c32566-ff62-43f8-84cf-ce08fdf55e5d)
+
+![image](https://github.com/swag1223/GitSpy/assets/83612016/f2bb8fa0-0fb0-4726-b7f7-c3167e54d3d6)
+
+
+
 
 ## Technologies
 
