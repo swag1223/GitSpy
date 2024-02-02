@@ -15,7 +15,10 @@ GITSPY: Search Github profiles
 
 ## About The Project
 
-This project contains a UI for a dashboard/admin panel. The admin panel will contain a top-navigation, sidebar and a main-content area.
+Designed and developed an intuitive user interface (UI) for GitHub profiles .
+Implemented real-time suggestions, auto-complete, and efficient search functionality .
+Enabled user login and authentication through GitHub credentials, managing sessions securely .
+Utilized GitHub Auth for login and interfaced with the GitHub API for data retrieval.
 
 ## Screenshots
 
